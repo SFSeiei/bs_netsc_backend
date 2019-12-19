@@ -43,4 +43,9 @@ public class OrderInfoServiceimpl implements OrderInfoService{
     public int delete(int oIId){
         return orderInfoMapper.delete(oIId);
     }
+
+    @Override
+    public int deleteByOrderId(int orderId){
+        return orderInfoMapper.deleteByOrderId(orderId);
+    }
 }

@@ -77,6 +77,26 @@ public class TrolleyController {
     }
 
     /**
+     * 根据PId&UId查询购物车
+     * @param uId,PId
+     * @return
+     */
+    @RequestMapping(value = "trolleyOne/uId={uId}", method = RequestMethod.GET)
+    public ResponseEntity<JsonResult> getTrolleyByPIdAndUId (@PathVariable(value = "uId") String uId,@RequestParam(value = "pId") int pId){
+        JsonResult r = new JsonResult();
+        try {
+            Trolley trolley = trolleyService.getTrolleyByPIdAndUId(pId, uId);
+            r.setResult(trolley);
+            r.setStatus("ok");
+        } catch (Exception e) {
+            r.setResult(e.getClass().getName() + ":" + e.getMessage());
+            r.setStatus("error");
+            e.printStackTrace();
+        }
+        return ResponseEntity.ok(r);
+    }
+
+    /**
      * 查询购物车列表
      * @param
      * @return
@@ -132,6 +152,32 @@ public class TrolleyController {
         JsonResult r = new JsonResult();
         try {
             int ret = trolleyService.delete(tid);
+            if (ret < 0) {
+                r.setResult(ret);
+                r.setStatus("fail");
+            } else {
+                r.setResult(ret);
+                r.setStatus("ok");
+            }
+        } catch (Exception e) {
+            r.setResult(e.getClass().getName() + ":" + e.getMessage());
+            r.setStatus("error");
+
+            e.printStackTrace();
+        }
+        return ResponseEntity.ok(r);
+    }
+
+    /**
+     * 根据pid删除购物车
+     * @param pid
+     * @return
+     */
+    @RequestMapping(value = "trolley/pid={pid}", method = RequestMethod.DELETE)
+    public ResponseEntity<JsonResult> deleteByPId (@PathVariable(value = "pid") int pid){
+        JsonResult r = new JsonResult();
+        try {
+            int ret = trolleyService.deleteByPId(pid);
             if (ret < 0) {
                 r.setResult(ret);
                 r.setStatus("fail");

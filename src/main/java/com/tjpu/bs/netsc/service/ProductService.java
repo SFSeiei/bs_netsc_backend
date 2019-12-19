@@ -1,6 +1,7 @@
 package com.tjpu.bs.netsc.service;
 
 import com.tjpu.bs.netsc.entity.Product;
+import com.tjpu.bs.netsc.pojo.PageResult;
 import org.apache.ibatis.annotations.*;
 
 import java.util.HashMap;
@@ -12,6 +13,7 @@ public interface ProductService {
     public Product getProductByPId(int pId);
     public List<HashMap<String,Object>> getProductByPName(String pName);
     public List<HashMap<String,Object>> getProducts();
+    public PageResult getProductsPage(int pageNum, int pageSize);
     public List<HashMap<String,Object>> getProductByBCName(@Param("bCName") String bCName);
 
     //INSERT

@@ -26,4 +26,7 @@ public interface OrderInfoMapper {
 
     @Delete("DELETE from tb_orderinfo where oIId = #{oIId} ")
     public int delete(@Param("oIId") int oIId);
+
+    @Delete("DELETE from tb_orderinfo where orderId = #{orderId} ")
+    public int deleteByOrderId(@Param("orderId") int orderId);
 }

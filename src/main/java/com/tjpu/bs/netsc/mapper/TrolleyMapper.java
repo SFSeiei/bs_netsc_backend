@@ -15,6 +15,9 @@ public interface TrolleyMapper {
     @Select("SELECT * FROM tb_trolley WHERE pName = #{pName} AND uId = #{uId}")
     Trolley getTrolleyByPNameAndUId(@Param("pName") String pName,@Param("uId") String uId);
 
+    @Select("SELECT * FROM tb_trolley WHERE pId = #{pId} AND uId = #{uId}")
+    Trolley getTrolleyByPIdAndUId(@Param("pId") int pId,@Param("uId") String uId);
+
     @Select("SELECT * FROM tb_trolley WHERE uId = #{uId}")
     public List<HashMap<String,Object>> getTrolleyByUId(@Param("uId") String uId);
 
@@ -29,4 +32,7 @@ public interface TrolleyMapper {
 
     @Delete("DELETE from tb_trolley where tId = #{tId} ")
     public int delete(@Param("tId") int tId);
+
+    @Delete("DELETE from tb_trolley where pId = #{pId} ")
+    public int deleteByPId(@Param("pId") int pId);
 }

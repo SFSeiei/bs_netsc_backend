@@ -2,6 +2,7 @@ package com.tjpu.bs.netsc.controller;
 
 import com.tjpu.bs.netsc.entity.Order;
 import com.tjpu.bs.netsc.pojo.JsonResult;
+import com.tjpu.bs.netsc.pojo.PageResult;
 import com.tjpu.bs.netsc.service.OrderInfoService;
 import com.tjpu.bs.netsc.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,7 +98,25 @@ public class OrderController {
         }
         return ResponseEntity.ok(r);
     }
-
+    /**
+     * 查询订单分页列表
+     * @param
+     * @return
+     */
+    @RequestMapping(value = "ordersPage", method = RequestMethod.GET)
+    public ResponseEntity<JsonResult> getrdersPage (int page,int pageSize,String uId){
+        JsonResult r = new JsonResult();
+        try {
+            PageResult orderlist = orderService.getOrdersPage(page, pageSize,uId);
+            r.setResult(orderlist);
+            r.setStatus("ok");
+        } catch (Exception e) {
+            r.setResult(e.getClass().getName() + ":" + e.getMessage());
+            r.setStatus("error");
+            e.printStackTrace();
+        }
+        return ResponseEntity.ok(r);
+    }
     /**
      * 添加订单
      * @param order

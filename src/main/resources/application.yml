@@ -18,3 +18,10 @@ mybatis:
 cbs:
   imagesPath:
     file:/D:/img/
+
+#pagehelper配置
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: countSql

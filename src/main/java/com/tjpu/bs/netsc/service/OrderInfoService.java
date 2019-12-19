@@ -17,4 +17,6 @@ public interface OrderInfoService {
     public int update(int oIId,OrderInfo orderInfo);
 
     public int delete(int oIId);
+
+    public int deleteByOrderId(int orderId);
 }

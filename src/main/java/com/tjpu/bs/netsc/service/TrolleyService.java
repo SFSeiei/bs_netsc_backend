@@ -11,6 +11,8 @@ public interface TrolleyService {
 
     Trolley getTrolleyByPNameAndUId(String pName,String uId);
 
+    Trolley getTrolleyByPIdAndUId(int pId,String uId);
+
     public List<HashMap<String,Object>> getTrolleyByUId(String uId);
 
     public List<HashMap<String,Object>> getTrolleyList();
@@ -20,4 +22,6 @@ public interface TrolleyService {
     public int update(int tId, Trolley trolley);
 
     public int delete(int tId);
+
+    public int deleteByPId(int pId);
 }

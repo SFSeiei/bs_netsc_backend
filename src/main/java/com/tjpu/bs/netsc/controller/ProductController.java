@@ -2,6 +2,7 @@ package com.tjpu.bs.netsc.controller;
 
 import com.tjpu.bs.netsc.entity.Product;
 import com.tjpu.bs.netsc.pojo.JsonResult;
+import com.tjpu.bs.netsc.pojo.PageResult;
 import com.tjpu.bs.netsc.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -110,6 +111,25 @@ public class ProductController {
         JsonResult r = new JsonResult();
         try {
             List<HashMap<String,Object>> productlist = productService.getProducts();
+            r.setResult(productlist);
+            r.setStatus("ok");
+        } catch (Exception e) {
+            r.setResult(e.getClass().getName() + ":" + e.getMessage());
+            r.setStatus("error");
+            e.printStackTrace();
+        }
+        return ResponseEntity.ok(r);
+    }
+    /**
+     * 查询商品分页列表
+     * @param
+     * @return
+     */
+    @RequestMapping(value = "productsPage", method = RequestMethod.GET)
+    public ResponseEntity<JsonResult> getProductsPage (int page,int pageSize){
+        JsonResult r = new JsonResult();
+        try {
+            PageResult productlist = productService.getProductsPage(page, pageSize);
             r.setResult(productlist);
             r.setStatus("ok");
         } catch (Exception e) {

@@ -128,6 +128,32 @@ public class OrderInfoController {
     }
 
     /**
+     * 根据orderId删除订单信息
+     * @param orderId
+     * @return
+     */
+    @RequestMapping(value = "orderinfo/orderId={orderId}", method = RequestMethod.DELETE)
+    public ResponseEntity<JsonResult> deleteByOrderId (@PathVariable(value = "orderId") int orderId){
+        JsonResult r = new JsonResult();
+        try {
+            int ret = orderInfoService.deleteByOrderId(orderId);
+            if (ret < 0) {
+                r.setResult(ret);
+                r.setStatus("fail");
+            } else {
+                r.setResult(ret);
+                r.setStatus("ok");
+            }
+        } catch (Exception e) {
+            r.setResult(e.getClass().getName() + ":" + e.getMessage());
+            r.setStatus("error");
+
+            e.printStackTrace();
+        }
+        return ResponseEntity.ok(r);
+    }
+
+    /**
      * 根据oiid修改订单信息
      * @param oiid,orderInfo
      * @return

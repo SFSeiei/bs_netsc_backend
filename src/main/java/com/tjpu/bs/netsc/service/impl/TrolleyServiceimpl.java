@@ -23,7 +23,10 @@ public class TrolleyServiceimpl implements TrolleyService {
     public Trolley getTrolleyByPNameAndUId(String pName,String uId){
         return trolleyMapper.getTrolleyByPNameAndUId(pName,uId);
     }
-
+    @Override
+    public Trolley getTrolleyByPIdAndUId(int pId,String uId){
+        return trolleyMapper.getTrolleyByPIdAndUId(pId,uId);
+    }
     @Override
     public List<HashMap<String,Object>> getTrolleyByUId(String uId){
         return trolleyMapper.getTrolleyByUId(uId);
@@ -47,5 +50,10 @@ public class TrolleyServiceimpl implements TrolleyService {
     @Override
     public int delete(int tId){
         return trolleyMapper.delete(tId);
+    }
+
+    @Override
+    public int deleteByPId(int pId){
+        return trolleyMapper.deleteByPId(pId);
     }
 }
